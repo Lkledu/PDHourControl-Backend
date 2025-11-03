@@ -13,4 +13,9 @@ public class EmployeeService {
     public Employee getEmployee(int id) {
         return repository.findById(id);
     }
+
+    public void createEmployee(String name, Integer estimatedHours, Integer squadId) {
+        Employee employee = new Employee(0, name, estimatedHours, squadId);
+        repository.save(employee);
+    }
 }

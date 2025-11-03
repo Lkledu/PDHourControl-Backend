@@ -13,4 +13,9 @@ public class SquadService {
     public Squad getSquad(int id) {
         return repository.findById(id);
     }
+
+    public void createSquad(String name) {
+        Squad squad = new Squad(0, name);
+        repository.save(squad);
+    }
 }

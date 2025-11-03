@@ -2,6 +2,7 @@ package com.PD.HourControl.controllers;
 
 import com.PD.HourControl.entities.Employee;
 import com.PD.HourControl.entities.Report;
+import com.PD.HourControl.entities.Squad;
 import com.PD.HourControl.services.EmployeeService;
 import com.PD.HourControl.services.ReportService;
 import com.PD.HourControl.services.SquadService;
@@ -22,41 +23,30 @@ public class HourControlController {
     @Autowired
     SquadService squadService;
 
-    @GetMapping("/getEmployee/{id}")
-    public ResponseEntity<String> getEmployee (@PathVariable int id) {
-        try {
-            employeeService.getEmployee(id);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-        return ResponseEntity.ok().body("Squad created successfully");
-    }
-
-    @PostMapping("/registerEmployee")
+    @PostMapping("/employee")
     public ResponseEntity<String> postEmployee (@RequestBody Employee employee) {
         try {
-            employeeService.createEmployee();
+            employeeService.createEmployee(employee.name, employee.estimatedHours, employee.squadId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-        return ResponseEntity.ok().body("");
+        return ResponseEntity.ok().body("Employee registered successfully");
     }
 
-    @GetMapping("/getReport/{id}")
-    public ResponseEntity<Report> getReport (@PathVariable int id) {
-        Report report;
+    @PostMapping("/report")
+    public ResponseEntity<String> postReport (@RequestBody Report report) {
         try {
-            report = reportService.getReport(id);
+            reportService.createReport(report.description, report.employeeId, report.spentHours);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-        return ResponseEntity.ok().body(report);
+        return ResponseEntity.ok().body("Report created successfully");
     }
 
-    @GetMapping("/getSquad/{id}")
-    public ResponseEntity<String> getSquad (@PathVariable int id) {
+    @PostMapping("/squad")
+    public ResponseEntity<String> postSquad (@RequestBody Squad squad) {
         try {
-            squadService.getSquad(id);
+            squadService.createSquad(squad.name);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
