@@ -1,8 +1,7 @@
 package com.PD.HourControl.entities;
 
 import jakarta.persistence.*;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "report", schema = "public")
@@ -14,12 +13,13 @@ public class Report {
     @Column(name = "employee_id")
     public Integer employeeId;
     public Integer spentHours;
-    public Date createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    public LocalDateTime createdAt;
 
     public Report() {
     }
 
-    public Report(Integer id, String description, Integer employeeId, Integer spentHours, Date createdAt) {
+    public Report(Integer id, String description, Integer employeeId, Integer spentHours, LocalDateTime createdAt) {
         this.id = id;
         this.description = description;
         this.employeeId = employeeId;
@@ -60,11 +60,11 @@ public class Report {
         this.spentHours = spentHours;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
     //</editor-fold>
