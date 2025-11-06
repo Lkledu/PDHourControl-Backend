@@ -1,5 +1,7 @@
-#Build
+# Build
 Executar no terminal
+```
 ./run.sh
+```
 
-## É necessário ter o docker compose instalado
+> ## É necessário ter o docker compose instalado
